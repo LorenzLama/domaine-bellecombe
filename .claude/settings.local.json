@@ -7,7 +7,12 @@
       "Bash(git add *)",
       "Bash(git -c user.email=lorenzo@local -c user.name=Lorenzo commit -m \"Domaine de Bellecombe redesign\" -q)",
       "Bash(git checkout *)",
-      "Bash(git branch *)"
+      "Bash(git branch *)",
+      "Bash(git remote *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://github.com/LorenzLama/domaine-bellecombe)",
+      "Bash(npm run *)",
+      "Bash(git -c user.email=lorenzo@local -c user.name=Lorenzo commit -m \"Add Netlify SPA redirect config\" -q)",
+      "Bash(git push *)"
     ]
   }
 }
