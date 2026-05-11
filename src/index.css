@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 42 30% 93%;
+    --background-alt: 44 36% 96%;
+    --foreground: 220 22% 14%;
+
+    --card: 44 36% 96%;
+    --card-foreground: 220 22% 14%;
+
+    --popover: 44 36% 96%;
+    --popover-foreground: 220 22% 14%;
+
+    --primary: 220 22% 18%;
+    --primary-foreground: 42 30% 93%;
+
+    --secondary: 30 26% 45%;
+    --secondary-foreground: 42 30% 93%;
+
+    --muted: 38 22% 86%;
+    --muted-foreground: 220 10% 38%;
+
+    --accent: 32 38% 52%;
+    --accent-foreground: 42 30% 93%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 36 18% 82%;
+    --input: 36 18% 82%;
+    --ring: 220 22% 18%;
+
+    --radius: 0px;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Jost', 'Helvetica Neue', sans-serif;
+
+    --charcoal-bg: 220 22% 14%;
+    --charcoal-fg: 42 30% 93%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-24;
+  }
+
+  .section-spacing {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .label-text {
+    @apply text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground;
+    font-family: var(--font-body);
+  }
+
+  .ornamental-divider {
+    @apply flex items-center justify-center gap-4 my-8;
+  }
+
+  .ornamental-divider::before,
+  .ornamental-divider::after {
+    content: '';
+    @apply h-px flex-1 bg-border;
+  }
+
+  .ornamental-mark {
+    @apply inline-flex items-center justify-center gap-3 my-6;
+  }
+  .ornamental-mark::before,
+  .ornamental-mark::after {
+    content: '';
+    width: 2.5rem;
+    height: 1px;
+    background: hsl(var(--border));
+  }
+  .ornamental-mark > span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    transform: rotate(45deg);
+    background: hsl(var(--accent));
+  }
+
+  .paper-texture {
+    position: relative;
+  }
+  .paper-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image:
+      radial-gradient(hsl(var(--foreground) / 0.015) 1px, transparent 1px),
+      radial-gradient(hsl(var(--foreground) / 0.01) 1px, transparent 1px);
+    background-size: 24px 24px, 12px 12px;
+    background-position: 0 0, 12px 12px;
+    z-index: 0;
+  }
+
+  .grain-overlay {
+    position: relative;
+  }
+
+  .grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+@keyframes ken-burns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes scroll-hint {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes logo-wipe {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.5;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes wordmark-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+    letter-spacing: 0.4em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 0.28em;
+  }
+}

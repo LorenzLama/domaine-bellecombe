@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /Users/lorenzo/Downloads/curated-french-gems-main/start.sh)",
+      "Bash(gh auth *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git -c user.email=lorenzo@local -c user.name=Lorenzo commit -m \"Domaine de Bellecombe redesign\" -q)",
+      "Bash(git checkout *)",
+      "Bash(git branch *)"
+    ]
+  }
+}
