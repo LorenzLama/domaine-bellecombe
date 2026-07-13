@@ -25,7 +25,26 @@
       "Bash(git -C /Users/lorenzo/Downloads/curated-french-gems-main/.claude/worktrees/bold-rubin-de75b3 status --short)",
       "Bash(git config *)",
       "Bash(ipconfig getifaddr *)",
-      "Bash(echo \"exit:$?\")"
+      "Bash(echo \"exit:$?\")",
+      "Bash(git fetch *)",
+      "Bash(dig +short domaine-bellecombe.com A)",
+      "Bash(dig +short www.domaine-bellecombe.com CNAME)",
+      "Bash(dig +short www.domaine-bellecombe.com A)",
+      "Bash(dig @8.8.8.8 +short www.domaine-bellecombe.com A)",
+      "Bash(dig @1.1.1.1 +short www.domaine-bellecombe.com A)",
+      "Bash(dig @ns35.domaincontrol.com +short www.domaine-bellecombe.com A)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" --resolve domaine-bellecombe.com:443:75.2.60.5 https://domaine-bellecombe.com/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" --resolve www.domaine-bellecombe.com:443:63.176.8.218 https://www.domaine-bellecombe.com/)",
+      "Bash(curl -sI https://domaine-bellecombe.com/)",
+      "Bash(curl -sI https://www.domaine-bellecombe.com/)",
+      "Bash(curl -v --max-time 15 https://domaine-bellecombe.com/)",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -c \"import qrcode; print\\('qrcode available'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"import qrcode; print\\('qrcode now available'\\)\")",
+      "Bash(python3 make_favicon_qr.py)",
+      "Bash(python3 -c \"import cv2; print\\('cv2 available', cv2.__version__\\)\")",
+      "Bash(python3)"
     ]
   }
 }
