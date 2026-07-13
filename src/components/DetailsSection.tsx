@@ -25,14 +25,9 @@ const DetailsSection = () => {
 
   return (
     <section id="details" className="section-padding section-spacing">
-      <div
-        ref={ref}
-        className={`max-w-6xl mx-auto transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
-      >
+      <div ref={ref} className="reveal max-w-6xl mx-auto">
         <div className="text-center mb-4">
-          <span className="label-text text-muted-foreground">Le Bien</span>
+          <span className="label-text text-muted-foreground">{t("details.eyebrow")}</span>
         </div>
         <h2 className="font-heading text-4xl md:text-5xl text-center mb-6 tracking-tight">{t("details.title")}</h2>
         <div className="ornamental-mark justify-center mb-20"><span /></div>
@@ -42,9 +37,7 @@ const DetailsSection = () => {
             {description.split("\n\n").map((para, i) => (
               <p
                 key={i}
-                className={`font-body leading-[1.9] text-foreground/85 mb-6 ${
-                  i === 0 ? "text-lg md:text-xl first-letter:float-left first-letter:font-heading first-letter:text-6xl first-letter:leading-[0.9] first-letter:mr-2 first-letter:mt-1 first-letter:text-foreground" : "text-base md:text-lg"
-                }`}
+                className="font-body text-base md:text-lg leading-[1.9] text-foreground/85 mb-6"
               >
                 {para}
               </p>
@@ -52,7 +45,7 @@ const DetailsSection = () => {
           </div>
 
           <div className="lg:pl-8 lg:border-l lg:border-border">
-            <span className="label-text text-muted-foreground block mb-6">Caractéristiques</span>
+            <span className="label-text text-muted-foreground block mb-6">{t("details.features")}</span>
             <ul className="space-y-0">
               {features.map((feat, i) => {
                 const Icon = feat.icon;

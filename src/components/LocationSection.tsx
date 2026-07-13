@@ -1,6 +1,13 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { MapPin, Car, TrainFront } from "lucide-react";
+import mapImage from "@/assets/map-situation.png";
+
+// Exact house position as a fraction of the map image. object-position uses the
+// same values, so under object-fit: cover the point always lands at this exact
+// fraction of the container — the marker stays anchored at every viewport size.
+const HOUSE_X = 58.09;
+const HOUSE_Y = 42.73;
 
 const distances = [
   { place: "location.reignier", car: "5 min", train: "—" },
@@ -13,72 +20,105 @@ const distances = [
   { place: "location.paris", car: "5h00", train: "4h45*" },
 ];
 
+const DistanceCard = () => {
+  const { t } = useLanguage();
+  return (
+    <div className="bg-background/95 backdrop-blur-sm border border-border p-6 lg:p-8">
+      <div className="mb-6">
+        <span className="font-heading text-xl lg:text-2xl text-foreground block mb-1">Reignier-Esery</span>
+        <span className="label-text text-muted-foreground">Haute-Savoie · France</span>
+      </div>
+      <div className="grid grid-cols-[1fr_60px_68px] lg:grid-cols-[1fr_80px_80px] items-center gap-2 pb-3 mb-1 border-b border-border">
+        <span className="label-text text-muted-foreground text-[10px] whitespace-nowrap">{t("location.destination")}</span>
+        <span className="flex items-center justify-end gap-1 text-muted-foreground">
+          <Car className="w-3.5 h-3.5 flex-shrink-0" strokeWidth={1.5} />
+          <span className="text-[9px] lg:text-[10px] font-medium uppercase tracking-[0.08em] whitespace-nowrap">{t("location.car")}</span>
+        </span>
+        <span className="flex items-center justify-end gap-1 text-muted-foreground">
+          <TrainFront className="w-3.5 h-3.5 flex-shrink-0" strokeWidth={1.5} />
+          <span className="text-[9px] lg:text-[10px] font-medium uppercase tracking-[0.08em] whitespace-nowrap">{t("location.train")}</span>
+        </span>
+      </div>
+      {distances.map((d, i) => (
+        <div
+          key={d.place}
+          className={`grid grid-cols-[1fr_60px_68px] lg:grid-cols-[1fr_80px_80px] items-center gap-2 py-3 ${
+            i < distances.length - 1 ? "border-b border-border/50" : ""
+          }`}
+        >
+          <span className="font-body text-sm lg:text-[15px] text-foreground whitespace-nowrap">{t(d.place)}</span>
+          <span className="font-heading text-xs lg:text-sm text-foreground/75 text-right tabular-nums whitespace-nowrap">{d.car}</span>
+          <span className="font-heading text-xs lg:text-sm text-foreground/75 text-right tabular-nums whitespace-nowrap">{d.train}</span>
+        </div>
+      ))}
+      <p className="font-body text-xs text-muted-foreground mt-6">
+        528/530 Chemin de Saint-Romain
+      </p>
+    </div>
+  );
+};
+
 const LocationSection = () => {
   const { t } = useLanguage();
-  const { ref, isVisible } = useScrollReveal();
+  const { ref } = useScrollReveal();
 
   return (
-    <section id="location" className="section-padding section-spacing bg-background-alt">
-      <div
-        ref={ref}
-        className={`max-w-5xl mx-auto transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
-      >
+    <section id="location" className="bg-background-alt pt-20 md:pt-28 lg:pt-32">
+      <div className="section-padding">
         <div className="text-center mb-4">
-          <span className="label-text text-muted-foreground">Situation</span>
+          <span className="label-text text-muted-foreground">{t("location.eyebrow")}</span>
         </div>
-        <h2 className="font-heading text-4xl md:text-5xl text-center mb-6 tracking-tight">{t("location.title")}</h2>
-        <div className="ornamental-mark justify-center mb-20"><span /></div>
+        <h2 className="font-heading text-4xl md:text-5xl text-center mb-6 tracking-tight">
+          {t("location.title")}
+        </h2>
+        <div className="ornamental-mark justify-center mb-14 md:mb-16"><span /></div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Location card */}
-          <div className="relative bg-background border border-border min-h-[340px] flex flex-col items-center justify-center p-8 text-center">
-            <MapPin className="w-10 h-10 text-accent mb-5" strokeWidth={1.25} />
-            <span className="font-heading text-2xl md:text-3xl text-foreground mb-2">
-              Reignier-Esery
-            </span>
-            <span className="label-text text-muted-foreground mb-6">Haute-Savoie · France</span>
-            <div className="flex items-center gap-3 my-2">
-              <span className="block w-8 h-px bg-border" />
-              <span className="block w-1 h-1 rotate-45 bg-accent/60" />
-              <span className="block w-8 h-px bg-border" />
-            </div>
-            <p className="font-body text-sm text-muted-foreground mt-4">
-              46.1325°N, 6.2680°E
-            </p>
-            <p className="font-body text-xs text-muted-foreground mt-1">
-              528/530 Chemin de Saint-Romain
-            </p>
+      <div ref={ref} className="reveal">
+        <div className="relative h-[60vh] md:h-[72vh] overflow-hidden border-y border-border">
+          <img
+            src={mapImage}
+            alt="Carte de situation — Domaine de Bellecombe, Reignier-Esery"
+            loading="lazy"
+            draggable={false}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: `${HOUSE_X}% ${HOUSE_Y}%` }}
+          />
+
+          {/* House marker — golden pin anchored on the exact spot */}
+          <div
+            className="absolute z-10 pointer-events-none"
+            style={{ left: `${HOUSE_X}%`, top: `${HOUSE_Y}%` }}
+          >
+            <span
+              className="absolute left-0 top-0 w-11 h-11 rounded-full bg-accent/15"
+              style={{ animation: "pin-pulse 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite" }}
+            />
+            <MapPin
+              className="absolute left-0 top-0 w-9 h-9 -translate-x-1/2 -translate-y-full text-accent drop-shadow-sm"
+              strokeWidth={1.5}
+              fill="none"
+            />
           </div>
 
-          {/* Distance table — fixed 3-col grid so headers/cells line up */}
-          <div>
-            <div className="grid grid-cols-[1fr_90px_90px] items-center pb-4 mb-2 border-b border-border">
-              <span className="label-text text-muted-foreground text-[10px]">Destination</span>
-              <span className="label-text text-muted-foreground text-[10px] flex items-center justify-end gap-2">
-                <Car className="w-3.5 h-3.5" strokeWidth={1.5} /> {t("location.car")}
-              </span>
-              <span className="label-text text-muted-foreground text-[10px] flex items-center justify-end gap-2">
-                <TrainFront className="w-3.5 h-3.5" strokeWidth={1.5} /> {t("location.train")}
-              </span>
+          {/* Distance table — floating card on desktop */}
+          <div className="hidden lg:flex absolute inset-y-0 left-10 xl:left-20 items-center z-10">
+            <div className="w-[380px] max-h-[calc(100%-3rem)] overflow-y-auto shadow-[0_30px_80px_-30px_hsl(var(--foreground)/0.4)]">
+              <DistanceCard />
             </div>
-            {distances.map((d, i) => (
-              <div
-                key={d.place}
-                className={`grid grid-cols-[1fr_90px_90px] items-center py-3.5 group transition-colors hover:text-foreground ${
-                  i < distances.length - 1 ? "border-b border-border/50" : ""
-                }`}
-              >
-                <span className="font-body text-[15px] text-foreground">{t(d.place)}</span>
-                <span className="font-heading text-sm text-foreground/75 text-right tabular-nums">{d.car}</span>
-                <span className="font-heading text-sm text-foreground/75 text-right tabular-nums">{d.train}</span>
-              </div>
-            ))}
           </div>
         </div>
 
-        <p className="text-center font-body text-sm text-muted-foreground max-w-2xl mx-auto mt-14 whitespace-pre-line italic">
+        {/* Distance table — below the map on mobile/tablet */}
+        <div className="lg:hidden section-padding mt-10">
+          <div className="max-w-md mx-auto">
+            <DistanceCard />
+          </div>
+        </div>
+      </div>
+
+      <div className="section-padding py-12 md:py-16">
+        <p className="text-center font-body text-sm text-muted-foreground max-w-2xl mx-auto whitespace-pre-line italic">
           {t("location.description")}
         </p>
       </div>

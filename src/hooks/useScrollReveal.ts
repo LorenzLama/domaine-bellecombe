@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export const useScrollReveal = (threshold = 0.15) => {
+export const useScrollReveal = (threshold = 0.12) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -12,10 +12,11 @@ export const useScrollReveal = (threshold = 0.15) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          el.classList.add("visible");
           observer.unobserve(el);
         }
       },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -60px 0px" }
     );
 
     observer.observe(el);

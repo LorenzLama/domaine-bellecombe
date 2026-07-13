@@ -53,7 +53,7 @@ const LoadingScreen = () => {
       }`}
       aria-hidden={stage !== "visible"}
     >
-      <div className="relative flex flex-col items-center">
+      <div className="relative flex flex-col items-center -translate-y-20 md:-translate-y-24">
         {/* Logo wipes in from left to right — like being drawn */}
         <div
           className="relative overflow-hidden"
@@ -68,13 +68,13 @@ const LoadingScreen = () => {
 
         {/* Wordmark */}
         <div
-          className="mt-8 flex flex-col items-center"
+          className="-mt-2 flex flex-col items-center"
           style={{ animation: "wordmark-in 1.4s ease-out 2.2s both" }}
         >
-          <h1 className="font-heading text-xl md:text-3xl tracking-[0.28em] text-foreground uppercase">
+          <h1 className="font-heading leading-none text-lg md:text-3xl tracking-[0.12em] -mr-[0.12em] md:tracking-[0.28em] md:-mr-[0.28em] text-foreground uppercase whitespace-nowrap">
             Domaine de Bellecombe
           </h1>
-          <div className="mt-4 flex items-center gap-3">
+          <div className="mt-5 flex items-center gap-3">
             <span className="block w-10 h-px bg-foreground/40" />
             <span className="block w-1.5 h-1.5 rotate-45 bg-foreground/60" />
             <span className="block w-10 h-px bg-foreground/40" />

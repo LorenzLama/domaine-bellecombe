@@ -13,8 +13,7 @@ interface FactProps {
 const Fact = ({ value, label, suffix = "", isVisible, staticLabel }: FactProps) => {
   const count = useCountUp(value, isVisible);
   return (
-    <div className="group flex flex-col items-center text-center px-4 py-10 md:py-12 transition-all duration-500">
-      {/* Fixed-height value row so every label aligns across the grid */}
+    <div className="reveal-child group flex flex-col items-center text-center px-4 py-10 md:py-12">
       <div className="h-12 md:h-14 lg:h-[60px] flex items-end justify-center">
         {staticLabel ? (
           <span className="font-heading italic text-2xl md:text-3xl lg:text-[34px] text-foreground leading-none tracking-tight">
@@ -35,20 +34,16 @@ const Fact = ({ value, label, suffix = "", isVisible, staticLabel }: FactProps) 
 
 const KeyFactsSection = () => {
   const { t } = useLanguage();
-  const { ref, isVisible } = useScrollReveal(0.25);
+  const { ref, isVisible } = useScrollReveal(0.2);
 
   return (
     <section ref={ref} className="bg-background-alt border-y border-border">
       <div className="section-padding py-4 md:py-8">
-        <div
-          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 transition-opacity duration-1000 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
-        >
+        <div className={`reveal-stagger grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 ${isVisible ? "visible" : ""}`}>
           <Fact value={27.6} suffix="ha" label={t("facts.land")} isVisible={isVisible} />
           <Fact value={663} suffix="m²" label={t("facts.mainHouse")} isVisible={isVisible} />
           <Fact value={3} label={t("facts.buildings")} isVisible={isVisible} />
-          <Fact value={0} label={t("facts.origins")} isVisible={isVisible} staticLabel="XIIIe s." />
+          <Fact value={0} label={t("facts.origins")} isVisible={isVisible} staticLabel={t("facts.originsValue")} />
           <Fact value={20} suffix="min" label={t("facts.fromGeneva")} isVisible={isVisible} />
           <Fact
             value={0}

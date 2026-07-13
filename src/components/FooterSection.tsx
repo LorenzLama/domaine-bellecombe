@@ -1,5 +1,4 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Instagram, Linkedin } from "lucide-react";
 import logo from "@/assets/logo-full.png";
 
 const FooterSection = () => {
@@ -17,22 +16,6 @@ const FooterSection = () => {
           <p className="label-text text-muted-foreground text-center">
             {t("footer.address")}
           </p>
-          <div className="flex items-center justify-center gap-5">
-            <a
-              href="#"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-5 h-5" strokeWidth={1.5} />
-            </a>
-            <a
-              href="#"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5" strokeWidth={1.5} />
-            </a>
-          </div>
         </div>
         <div className="border-t border-border mt-12 pt-6 text-center">
           <p className="text-xs text-muted-foreground leading-relaxed max-w-2xl mx-auto">

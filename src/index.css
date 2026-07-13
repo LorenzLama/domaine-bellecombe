@@ -101,7 +101,7 @@
   }
 
   .ornamental-mark {
-    @apply inline-flex items-center justify-center gap-3 my-6;
+    @apply flex items-center justify-center gap-3 my-6;
   }
   .ornamental-mark::before,
   .ornamental-mark::after {
@@ -150,6 +150,17 @@
   }
 }
 
+@keyframes pin-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.35);
+    opacity: 0.6;
+  }
+  70%, 100% {
+    transform: translate(-50%, -50%) scale(1.4);
+    opacity: 0;
+  }
+}
+
 @keyframes ken-burns {
   0% {
     transform: scale(1);
@@ -166,8 +177,52 @@
   }
   50% {
     opacity: 0.4;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
+}
+
+/* Smooth scroll-reveal base */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children inside a reveal-stagger parent */
+.reveal-stagger > .reveal-child {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-stagger.visible > .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-stagger.visible > .reveal-child:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(2) { transition-delay: 120ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(3) { transition-delay: 240ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(4) { transition-delay: 360ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(5) { transition-delay: 480ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(6) { transition-delay: 600ms; }
+
+/* Image reveal — fades in with subtle scale */
+.img-reveal {
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.img-reveal.visible {
+  opacity: 1;
+  transform: scale(1);
 }
 
 @keyframes logo-wipe {

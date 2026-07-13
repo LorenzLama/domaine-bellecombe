@@ -12,7 +12,20 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://github.com/LorenzLama/domaine-bellecombe)",
       "Bash(npm run *)",
       "Bash(git -c user.email=lorenzo@local -c user.name=Lorenzo commit -m \"Add Netlify SPA redirect config\" -q)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(gh repo *)",
+      "Bash(npm install *)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git commit -m ' *)",
+      "Bash(python3 -c \"import PIL; print\\('PIL ok'\\)\")",
+      "Bash(python3 /private/tmp/claude-501/-Users-lorenzo-Downloads-curated-french-gems-main--claude-worktrees-bold-rubin-de75b3/9a0177d7-feef-48f6-9c6b-3ee64624710f/scratchpad/extract_map.py)",
+      "Bash(python3 /private/tmp/claude-501/-Users-lorenzo-Downloads-curated-french-gems-main--claude-worktrees-bold-rubin-de75b3/9a0177d7-feef-48f6-9c6b-3ee64624710f/scratchpad/extract_bedrooms.py)",
+      "Bash(git -C /Users/lorenzo/Downloads/curated-french-gems-main/.claude/worktrees/bold-rubin-de75b3 remote -v)",
+      "Bash(git -C /Users/lorenzo/Downloads/curated-french-gems-main/.claude/worktrees/bold-rubin-de75b3 status --short)",
+      "Bash(git config *)",
+      "Bash(ipconfig getifaddr *)",
+      "Bash(echo \"exit:$?\")"
     ]
   }
 }

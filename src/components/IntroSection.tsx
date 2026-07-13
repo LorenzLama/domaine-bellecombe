@@ -4,17 +4,12 @@ import introView from "@/assets/exterior-view.jpg";
 
 const IntroSection = () => {
   const { t } = useLanguage();
-  const { ref, isVisible } = useScrollReveal();
-  const { ref: imgRef, isVisible: imgVisible } = useScrollReveal();
+  const { ref } = useScrollReveal();
+  const { ref: imgRef } = useScrollReveal();
 
   return (
-    <section className="section-padding py-24 md:py-32 lg:py-40">
-      <div
-        ref={ref}
-        className={`max-w-3xl mx-auto text-center transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
-      >
+    <section id="estate" className="section-padding py-24 md:py-32 lg:py-40">
+      <div ref={ref} className="reveal max-w-3xl mx-auto text-center">
         <span className="label-text text-muted-foreground mb-6 block">
           {t("intro.eyebrow")}
         </span>
@@ -25,12 +20,7 @@ const IntroSection = () => {
         <div className="ornamental-mark justify-center mt-12"><span /></div>
       </div>
 
-      <div
-        ref={imgRef}
-        className={`mt-20 md:mt-28 max-w-6xl mx-auto transition-all duration-[1200ms] ${
-          imgVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-        }`}
-      >
+      <div ref={imgRef} className="img-reveal mt-20 md:mt-28 max-w-6xl mx-auto">
         <div className="relative overflow-hidden aspect-[16/9]">
           <img
             src={introView}
